@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vect2.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abenrach <abenrach@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/17 18:15:00 by abenrach          #+#    #+#             */
+/*   Updated: 2026/11/17 18:15:00 by abenrach         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vect2.hpp"
 
 vect2::vect2(void)
@@ -17,8 +29,6 @@ vect2::vect2(const vect2 &src)
     *this = src;
 }
 
-vect2::~vect2(void) {}
-
 vect2   &vect2::operator=(const vect2 &src)
 {
     if (this != &src)
@@ -34,12 +44,10 @@ int &vect2::operator[](int idx)
     return (this->_tab[idx]);
 }
 
-const int &vect2::operator[](int idx) const
+int vect2::operator[](int idx) const
 {
     return (this->_tab[idx]);
 }
-
-// --- Incrémentation / Décrémentation ---
 
 vect2   &vect2::operator++(void)
 {
@@ -69,61 +77,10 @@ vect2   vect2::operator--(int)
     return (tmp);
 }
 
-// --- Moins unaire ---
-
-vect2   vect2::operator-(void) const
+vect2   &vect2::operator+=(const vect2 &src)
 {
-    return (vect2(-this->_tab[0], -this->_tab[1]));
-}
-
-// --- Opérateurs arithmétiques (créent un nouveau vect2) ---
-
-vect2   vect2::operator+(const vect2 &v) const
-{
-    return (vect2(this->_tab[0] + v._tab[0], this->_tab[1] + v._tab[1]));
-}
-
-vect2   vect2::operator+(int nb) const
-{
-    return (vect2(this->_tab[0] + nb, this->_tab[1] + nb));
-}
-
-vect2   vect2::operator-(const vect2 &v) const
-{
-    return (vect2(this->_tab[0] - v._tab[0], this->_tab[1] - v._tab[1]));
-}
-
-vect2   vect2::operator-(int nb) const
-{
-    return (vect2(this->_tab[0] - nb, this->_tab[1] - nb));
-}
-
-vect2   vect2::operator*(const vect2 &v) const
-{
-    return (vect2(this->_tab[0] * v._tab[0], this->_tab[1] * v._tab[1]));
-}
-
-vect2   vect2::operator*(int nb) const
-{
-    return (vect2(this->_tab[0] * nb, this->_tab[1] * nb));
-}
-
-vect2   vect2::operator/(const vect2 &v) const
-{
-    return (vect2(this->_tab[0] / v._tab[0], this->_tab[1] / v._tab[1]));
-}
-
-vect2   vect2::operator/(int nb) const
-{
-    return (vect2(this->_tab[0] / nb, this->_tab[1] / nb));
-}
-
-// --- Opérateurs d'assignation composée (modifient *this) ---
-
-vect2   &vect2::operator+=(const vect2 &v)
-{
-    this->_tab[0] += v._tab[0];
-    this->_tab[1] += v._tab[1];
+    this->_tab[0] += src._tab[0];
+    this->_tab[1] += src._tab[1];
     return (*this);
 }
 
@@ -134,10 +91,10 @@ vect2   &vect2::operator+=(int nb)
     return (*this);
 }
 
-vect2   &vect2::operator-=(const vect2 &v)
+vect2   &vect2::operator-=(const vect2 &src)
 {
-    this->_tab[0] -= v._tab[0];
-    this->_tab[1] -= v._tab[1];
+    this->_tab[0] -= src._tab[0];
+    this->_tab[1] -= src._tab[1];
     return (*this);
 }
 
@@ -148,10 +105,10 @@ vect2   &vect2::operator-=(int nb)
     return (*this);
 }
 
-vect2   &vect2::operator*=(const vect2 &v)
+vect2   &vect2::operator*=(const vect2 &src)
 {
-    this->_tab[0] *= v._tab[0];
-    this->_tab[1] *= v._tab[1];
+    this->_tab[0] *= src._tab[0];
+    this->_tab[1] *= src._tab[1];
     return (*this);
 }
 
@@ -162,37 +119,49 @@ vect2   &vect2::operator*=(int nb)
     return (*this);
 }
 
-vect2   &vect2::operator/=(const vect2 &v)
+vect2   vect2::operator+(const vect2 &src) const
 {
-    this->_tab[0] /= v._tab[0];
-    this->_tab[1] /= v._tab[1];
+    return (vect2(this->_tab[0] + src._tab[0], this->_tab[1] + src._tab[1]));
+}
+
+vect2   vect2::operator+(int nb) const
+{
+    return (vect2(this->_tab[0] + nb, this->_tab[1] + nb));
+}
+
+vect2   vect2::operator-(const vect2 &src) const
+{
+    return (vect2(this->_tab[0] - src._tab[0], this->_tab[1] - src._tab[1]));
+}
+
+vect2   vect2::operator-(int nb) const
+{
+    return (vect2(this->_tab[0] - nb, this->_tab[1] - nb));
+}
+
+vect2   vect2::operator*(const vect2 &src) const
+{
+    return (vect2(this->_tab[0] * src._tab[0], this->_tab[1] * src._tab[1]));
+}
+
+vect2   vect2::operator*(int nb) const
+{
+    return (vect2(this->_tab[0] * nb, this->_tab[1] * nb));
+}
+
+vect2   &vect2::operator-(void)
+{
+    this->_tab[0] *= -1;
+    this->_tab[1] *= -1;
     return (*this);
 }
 
-vect2   &vect2::operator/=(int nb)
+vect2::~vect2(void){}
+
+std::ostream    &operator<<(std::ostream &os, const vect2 &v)
 {
-    this->_tab[0] /= nb;
-    this->_tab[1] /= nb;
-    return (*this);
-}
-
-// --- Comparaisons ---
-
-bool    vect2::operator==(const vect2 &v) const
-{
-    return (this->_tab[0] == v._tab[0] && this->_tab[1] == v._tab[1]);
-}
-
-bool    vect2::operator!=(const vect2 &v) const
-{
-    return (!(*this == v));
-}
-
-// --- Fonctions non-membres ---
-
-vect2   operator+(int nb, const vect2 &v)
-{
-    return (v + nb);
+    os << "{" << v[0] << ", " << v[1] << "}";
+    return (os);
 }
 
 vect2   operator-(int nb, const vect2 &v)
@@ -205,8 +174,7 @@ vect2   operator*(int nb, const vect2 &v)
     return (v * nb);
 }
 
-std::ostream   &operator<<(std::ostream &os, const vect2 &v)
+vect2   operator+(int nb, const vect2 &v)
 {
-    os << "{" << v[0] << ", " << v[1] << "}";
-    return (os);
+    return (v + nb);
 }

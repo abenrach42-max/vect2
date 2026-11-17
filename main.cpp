@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenrach <abenrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/12 00:39:37 by abenrach          #+#    #+#             */
-/*   Updated: 2026/11/12 00:39:37 by abenrach         ###   ########.fr       */
+/*   Created: 2026/11/17 18:14:47 by abenrach          #+#    #+#             */
+/*   Updated: 2026/11/17 18:14:47 by abenrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vect2.hpp"
 
-int main()
+int main(void)
 {
     vect2 v1; // 0, 0
     vect2 v2(1, 2); // 1, 2
@@ -42,9 +42,5 @@ int main()
     v1[1] = 12;
     std::cout << "v1[1]: " << v1[1] << std::endl;
     std::cout << "v3[1]: " << v3[1] << std::endl;
-    std::cout << "v1 == v3: " << (v1 == v3) << std::endl;
-    std::cout << "v1 == v1: " << (v1 == v1) << std::endl;
-    std::cout << "v1 != v3: " << (v1 != v3) << std::endl;
-    std::cout << "v1 != v1: " << (v1 != v1) << std::endl;
     return (0);
 }
